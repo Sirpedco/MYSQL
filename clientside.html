@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table id="clinton">
+       <thead>
+        <tr>
+            <th>QUESTION</th>
+            <th>SCORE</th>
+            </tr>
+       </thead> 
+       <tbody></tbody>
+    </table>
+        <script>
+            let xhttp = new XMLHttpRequest()//CREATING XML OBJECT//
+            xhttp.onload = function(){ //call back function//
+                console.log(xhttp.responseText)//
+                const Tag = document.querySelector('#clinton tbody')
+                Tag.innerHTML="";
+                const result= JSON.parse(xhttp.responseText);
+                for(let i=0 ; i < result.length; i++){
+                    Tag.innerHTML +=`
+                    <tr><td> ${result[i].questions}</td>
+                        <td> ${result[i].score}</td>
+                        </tr>`
+            }}
+            xhttp.open('GET','/get-questions',true);//get for getting a record, post to send and recieve a response// //true means its synchronous//
+            xhttp.send(); //absolute URLs always include the domain name of the site with http://www. Relative links show the path to the file or refer to the file itself//
+        </script>
+</body>
+</html>
